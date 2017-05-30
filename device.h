@@ -1,5 +1,14 @@
 #ifndef SHAPI_DEVICE_H
 #define SHAPI_DEVICE_H
+#include <iostream>
+#include <list>
+
+typedef struct func {
+	char* function_name;
+	char** args;
+};
+
+
 ///Device interface describes fuctions every device must know.
 /*! 
 The Device interface will be inherited by different Devices like sensors or actuators. 
@@ -34,6 +43,8 @@ private:
 	
 
 public:
+
+
 	///Returns the status of the device.
 	/*!
 	getStatus() returns the status of the device. If status is "okay" it should always return 0. 
@@ -47,6 +58,11 @@ public:
 	If no errors occured, the return value should be 0.
 	*/
 	virtual int setData() = 0;
+
+
+	virtual int exec(char* function_name, char** args) = 0;
+	virtual std::list<char*, char**> listFunctions() = 0;
+	
 
 };
 
